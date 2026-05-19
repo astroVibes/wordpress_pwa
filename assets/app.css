@@ -1,0 +1,261 @@
+/**
+ * PWA Core - Stili frontend
+ *
+ * Contiene stili per:
+ * 1. Indicatore online/offline
+ * 2. Banner automatico installazione
+ * 3. Pulsanti shortcode [pwa_install_button]
+ * 4. Widget stato [pwa_install_status]
+ * 5. Modale istruzioni iOS
+ */
+
+/* ========================================================================
+   1. INDICATORE ONLINE/OFFLINE
+   ======================================================================== */
+#pwa-core-indicator {
+	position: fixed;
+	bottom: 20px;
+	left: 50%;
+	transform: translateX(-50%) translateY(120%);
+	z-index: 999999;
+	padding: 12px 20px;
+	border-radius: 999px;
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+	font-size: 14px;
+	font-weight: 500;
+	color: #fff;
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+	transition: transform 0.3s ease, opacity 0.3s ease;
+	opacity: 0;
+	pointer-events: none;
+	max-width: calc(100vw - 40px);
+	text-align: center;
+}
+
+#pwa-core-indicator.is-visible {
+	transform: translateX(-50%) translateY(0);
+	opacity: 1;
+}
+
+#pwa-core-indicator[data-status="online"]  { background: #16a34a; }
+#pwa-core-indicator[data-status="offline"] { background: #dc2626; }
+
+/* ========================================================================
+   2. BANNER AUTOMATICO INSTALLAZIONE
+   ======================================================================== */
+#pwa-core-install-banner {
+	position: fixed;
+	bottom: 20px;
+	left: 50%;
+	transform: translateX(-50%) translateY(120%);
+	z-index: 999998;
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	padding: 12px 16px;
+	background: #1f2937;
+	color: #fff;
+	border-radius: 12px;
+	box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+	font-size: 14px;
+	transition: transform 0.3s ease, opacity 0.3s ease;
+	opacity: 0;
+	pointer-events: none;
+	max-width: calc(100vw - 40px);
+}
+
+#pwa-core-install-banner.is-visible {
+	transform: translateX(-50%) translateY(0);
+	opacity: 1;
+	pointer-events: auto;
+}
+
+.pwa-core-install-text { flex: 1; min-width: 0; }
+
+.pwa-core-install-btn {
+	flex-shrink: 0;
+	padding: 6px 14px;
+	border: 0;
+	border-radius: 6px;
+	background: #2271b1;
+	color: #fff;
+	font-size: 14px;
+	font-weight: 500;
+	cursor: pointer;
+}
+.pwa-core-install-btn:hover { background: #135e96; }
+
+.pwa-core-install-dismiss {
+	flex-shrink: 0;
+	width: 28px;
+	height: 28px;
+	padding: 0;
+	border: 0;
+	background: transparent;
+	color: #fff;
+	font-size: 22px;
+	line-height: 1;
+	cursor: pointer;
+	opacity: 0.7;
+}
+.pwa-core-install-dismiss:hover { opacity: 1; }
+
+/* ========================================================================
+   3. PULSANTI SHORTCODE [pwa_install_button]
+   ======================================================================== */
+
+/**
+ * Stile base del pulsante shortcode.
+ * Il tema può sovrascrivere questi stili aggiungendo più specificità.
+ */
+.pwa-core-install-trigger {
+	display: inline-flex;
+	align-items: center;
+	gap: 8px;
+	padding: 10px 20px;
+	border: 0;
+	border-radius: 6px;
+	background: #2271b1;
+	color: #fff;
+	font-family: inherit;
+	font-size: 1rem;
+	font-weight: 500;
+	line-height: 1.4;
+	cursor: pointer;
+	text-decoration: none;
+	transition: background 0.2s ease, opacity 0.2s ease;
+	-webkit-appearance: none;
+	appearance: none;
+}
+
+.pwa-core-install-trigger:hover,
+.pwa-core-install-trigger:focus-visible {
+	background: #135e96;
+	color: #fff;
+	text-decoration: none;
+}
+
+.pwa-core-install-trigger:focus-visible {
+	outline: 3px solid #2271b1;
+	outline-offset: 2px;
+}
+
+/* Stato "già installata" (quando installed_text è valorizzato). */
+.pwa-core-install-trigger.pwa-core-trigger--installed {
+	background: #4b5563;
+	cursor: default;
+	opacity: 0.8;
+}
+.pwa-core-install-trigger.pwa-core-trigger--installed:hover {
+	background: #4b5563;
+}
+
+/* ========================================================================
+   4. WIDGET STATO [pwa_install_status]
+   ======================================================================== */
+.pwa-core-install-status {
+	display: inline-block;
+}
+
+.pwa-core-install-status.is-hidden {
+	display: none;
+}
+
+/* ========================================================================
+   5. MODALE ISTRUZIONI iOS
+   ======================================================================== */
+#pwa-core-ios-modal {
+	position: fixed;
+	inset: 0;
+	z-index: 999997;
+	display: flex;
+	align-items: flex-end;
+	justify-content: center;
+	opacity: 0;
+	pointer-events: none;
+	transition: opacity 0.25s ease;
+}
+
+#pwa-core-ios-modal.is-visible {
+	opacity: 1;
+	pointer-events: auto;
+}
+
+.pwa-core-ios-modal-backdrop {
+	position: absolute;
+	inset: 0;
+	background: rgba(0, 0, 0, 0.5);
+	z-index: 0;
+}
+
+.pwa-core-ios-modal-inner {
+	position: relative;
+	z-index: 1;
+	width: 100%;
+	max-width: 480px;
+	margin: 0 12px 32px;
+	padding: 24px 20px 20px;
+	background: #fff;
+	border-radius: 16px;
+	box-shadow: 0 -4px 32px rgba(0, 0, 0, 0.15);
+	text-align: center;
+	transform: translateY(20px);
+	transition: transform 0.25s ease;
+}
+
+#pwa-core-ios-modal.is-visible .pwa-core-ios-modal-inner {
+	transform: translateY(0);
+}
+
+.pwa-core-ios-modal-text {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+	font-size: 15px;
+	line-height: 1.6;
+	color: #1f2937;
+	margin: 0 0 16px;
+}
+
+.pwa-core-ios-modal-close {
+	display: inline-block;
+	padding: 10px 24px;
+	border: 0;
+	border-radius: 8px;
+	background: #2271b1;
+	color: #fff;
+	font-size: 15px;
+	font-weight: 500;
+	cursor: pointer;
+}
+.pwa-core-ios-modal-close:hover { background: #135e96; }
+
+/* ========================================================================
+   RESPONSIVE
+   ======================================================================== */
+@media (max-width: 480px) {
+	#pwa-core-install-banner {
+		left: 12px;
+		right: 12px;
+		transform: translateY(120%);
+		max-width: none;
+	}
+	#pwa-core-install-banner.is-visible {
+		transform: translateY(0);
+	}
+}
+
+/* ========================================================================
+   ACCESSIBILITÀ: prefers-reduced-motion
+   ======================================================================== */
+@media (prefers-reduced-motion: reduce) {
+	#pwa-core-indicator,
+	#pwa-core-install-banner {
+		transition: opacity 0.2s ease;
+		transform: translateX(-50%) translateY(0);
+	}
+	#pwa-core-ios-modal,
+	.pwa-core-ios-modal-inner {
+		transition: opacity 0.2s ease;
+		transform: none;
+	}
+}
